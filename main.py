@@ -156,4 +156,12 @@ def chat(request: ChatRequest):
         span.set_attribute("gen_ai.usage.output_tokens", output_tokens)
         record_finops_usage(request_id, response_model, input_tokens, output_tokens)
         return {"response": content, "sessionId": request.session_id, "model": MODEL}
+import uvicorn
+
+if __name__ == "__main__":
+    uvicorn.run(
+        app,
+        host="0.0.0.0",
+        port=int(os.environ.get("PORT", "8000")),
+    )
 
